@@ -38,7 +38,7 @@ class TestMotionless(unittest.TestCase):
             vmap.generate_url(),
             'https://maps.googleapis.com/maps/api/staticmap?maptype=terrain&'
             'format=png&scale=1&size=400x400&sensor=false&'
-            'visible=Sugarbowl%2C%20Truckee%2C%20CA|Tahoe%20City%2C%20CA&'
+            'visible=Sugarbowl%2C%20Truckee%2C%20CA%7CTahoe%20City%2C%20CA&'
             'language=en')
 
     def test_create_map_with_address(self):
