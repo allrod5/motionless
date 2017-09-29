@@ -217,8 +217,7 @@ class VisibleMap(Map):
 
     def generate_url(self):
         self.check_parameters()
-        url = "%s%smaptype=%s&format=%s&scale=%s&size=%sx%s&sensor=%s&visible=%s&language=%s" % (
-            self.base_url,
+        query = "%smaptype=%s&format=%s&scale=%s&size=%sx%s&sensor=%s&visible=%s&language=%s" % (
             self._get_key(),
             self.maptype,
             self.format,
@@ -229,7 +228,10 @@ class VisibleMap(Map):
             "|".join(self.locations),
             self.language)
 
+        url = self.base_url + quote(query, safe='/&=%')
+
         self._check_url(url)
+
         return url
 
 
@@ -385,7 +387,7 @@ class DecoratedMap(Map):
                 for prop, rule in style_map['rules'].items():
                     query = "%s%s:%s|" % (query, prop, str(rule).replace('#', '0x'))
 
-        url = self.base_url + quote(query, safe='/&=')
+        url = self.base_url + quote(query, safe='/&=%')
 
         self._check_url(url)
 
