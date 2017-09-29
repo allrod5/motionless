@@ -145,8 +145,7 @@ class CenterMap(Map):
             self.center = "1600 Amphitheatre Parkway Mountain View, CA"
 
     def generate_url(self):
-        url = "%s%smaptype=%s&format=%s&scale=%s&center=%s&zoom=%s&size=%sx%s&sensor=%s&language=%s" % (
-            self.base_url,
+        query = "%smaptype=%s&format=%s&scale=%s&center=%s&zoom=%s&size=%sx%s&sensor=%s&language=%s" % (
             self._get_key(),
             self.maptype,
             self.format,
@@ -157,6 +156,8 @@ class CenterMap(Map):
             self.size_y,
             self._get_sensor(),
             self.language)
+
+        url = self.base_url + quote(query, safe='/&=%')
 
         self._check_url(url)
         return url
